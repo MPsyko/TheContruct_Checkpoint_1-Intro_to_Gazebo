@@ -207,65 +207,113 @@
 
     <!-- Left Wheel -->
     <gazebo reference="left_wheel">
-        <!-- TODO: Define mu1 (first friction coefficient) -->
+        <!-- mu1 (first friction coefficient) -->
         <mu1>1</mu1>
-        <!-- TODO: Define mu2 (second friction coefficient) -->
+        <!-- mu2 (second friction coefficient) -->
         <mu2>1</mu2>
-        <!-- TODO: Define kp (contact stiffness) -->
+        <!-- kp (contact stiffness) -->
         <kp>1e7</kp>
-        <!-- TODO: Define kd (contact damping) -->
+        <!-- kd (contact damping) -->
         <kd>1</kd>
-        <!-- TODO: Define fdir1 (friction direction) -->
+        <!-- fdir1 (friction direction) -->
         <fdir1>1 0 0</fdir1>
-        <!-- TODO: Choose a material for visualization -->
         <material>Gazebo/Blue</material>
     </gazebo>
 
     <!-- Right Wheel -->
     <gazebo reference="right_wheel">
-        <!-- TODO: Define mu1 (first friction coefficient) -->
+        <!-- mu1 (first friction coefficient) -->
         <mu1>1</mu1>
-        <!-- TODO: Define mu2 (second friction coefficient) -->
+        <!-- mu2 (second friction coefficient) -->
         <mu2>1</mu2>
-        <!-- TODO: Define kp (contact stiffness) -->
+        <!-- kp (contact stiffness) -->
         <kp>1e7</kp>
-        <!-- TODO: Define kd (contact damping) -->
+        <!-- kd (contact damping) -->
         <kd>1</kd>
-        <!-- TODO: Define fdir1 (friction direction) -->
+        <!-- fdir1 (friction direction) -->
         <fdir1>1 0 0</fdir1>
-        <!-- TODO: Choose a material for visualization -->
         <material>Gazebo/Blue</material>
     </gazebo>
 
     <!-- Front Caster -->
     <gazebo reference="front_caster">
-        <!-- TODO: Define mu1 (first friction coefficient) -->
+        <!-- mu1 (first friction coefficient) -->
         <mu1>0</mu1>
-        <!-- TODO: Define mu2 (second friction coefficient) -->
+        <!-- mu2 (second friction coefficient) -->
         <mu2>0</mu2>
-        <!-- TODO: Define kp (contact stiffness) -->
+        <!-- kp (contact stiffness) -->
         <kp>1e7</kp>
-        <!-- TODO: Define kd (contact damping) -->
+        <!-- kd (contact damping) -->
         <kd>1</kd>
-        <!-- TODO: Define fdir1 (friction direction) -->
+        <!-- fdir1 (friction direction) -->
         <fdir1>1 0 0</fdir1>
-        <!-- TODO: Choose a material for visualization -->
         <material>Gazebo/Red</material>
     </gazebo>
 
     <!-- Back Caster -->
     <gazebo reference="back_caster">
-        <!-- TODO: Define mu1 (first friction coefficient) -->
+        <!-- mu1 (first friction coefficient) -->
         <mu1>0</mu1>
-        <!-- TODO: Define mu2 (second friction coefficient) -->
+        <!-- mu2 (second friction coefficient) -->
         <mu2>0</mu2>
-        <!-- TODO: Define kp (contact stiffness) -->
+        <!-- kp (contact stiffness) -->
         <kp>1e7</kp>
-        <!-- TODO: Define kd (contact damping) -->
+        <!-- kd (contact damping) -->
         <kd>1</kd>
-        <!-- TODO: Define fdir1 (friction direction) -->
+        <!-- fdir1 (friction direction) -->
         <fdir1>1 0 0</fdir1>
-        <!-- TODO: Choose a material for visualization -->
         <material>Gazebo/Red</material>
     </gazebo>
+
+    <!-- ROS Differential Driver Plugin -->
+    <gazebo>
+        <plugin filename="libgazebo_ros_diff_drive.so" name="differential_drive_controller">
+            <alwaysOn>true</alwaysOn>
+            <updateRate>20</updateRate>
+            <leftJoint>base_link_left_wheel_joint</leftJoint>
+            <rightJoint>base_link_right_wheel_joint</rightJoint>
+            <wheelSeparation>0.4</wheelSeparation>
+            <wheelDiameter>0.05</wheelDiameter>
+            <torque>10</torque>
+            <commandTopic>cmd_vel</commandTopic>
+            <odometryTopic>odom</odometryTopic>
+            <odometryFrame>odom</odometryFrame>
+            <robotBaseFrame>base_link</robotBaseFrame>
+        </plugin>
+    </gazebo>
+
+    <!-- Laser Scan Plugin -->
+    <gazebo reference="front_laser">
+        <sensor type="ray" name="head_hokuyo_sensor">
+            <pose>0 0 0 0 0 0</pose>
+            <visualize>false</visualize>
+            <update_rate>20</update_rate>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>720</samples>
+                        <resolution>1</resolution>
+                        <min_angle>-1.570796</min_angle>
+                        <max_angle>1.570796</max_angle>
+                    </horizontal>
+                </scan>
+                <range>
+                    <min>0.20</min>
+                    <max>10.0</max>
+                    <resolution>0.01</resolution>
+                </range>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0.0</mean>
+                    <stddev>0.01</stddev>
+                </noise>
+            </ray>
+            <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
+                <topicName>/scan</topicName>
+                <frameName>sensor_laser</frameName>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+
 </robot>
