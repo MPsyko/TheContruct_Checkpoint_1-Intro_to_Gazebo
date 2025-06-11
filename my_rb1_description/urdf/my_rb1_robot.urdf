@@ -198,4 +198,74 @@
         <parent link="base_link" />
         <child link="front_laser" />
     </joint>
+
+
+    <!-- Gazebo visualization -->
+    <gazebo reference="base_link">
+        <material>Gazebo/Black</material>
+    </gazebo>
+
+    <!-- Left Wheel -->
+    <gazebo reference="left_wheel">
+        <!-- TODO: Define mu1 (first friction coefficient) -->
+        <mu1>1</mu1>
+        <!-- TODO: Define mu2 (second friction coefficient) -->
+        <mu2>1</mu2>
+        <!-- TODO: Define kp (contact stiffness) -->
+        <kp>1e7</kp>
+        <!-- TODO: Define kd (contact damping) -->
+        <kd>1</kd>
+        <!-- TODO: Define fdir1 (friction direction) -->
+        <fdir1>1 0 0</fdir1>
+        <!-- TODO: Choose a material for visualization -->
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
+    <!-- Right Wheel -->
+    <gazebo reference="right_wheel">
+        <!-- TODO: Define mu1 (first friction coefficient) -->
+        <mu1>1</mu1>
+        <!-- TODO: Define mu2 (second friction coefficient) -->
+        <mu2>1</mu2>
+        <!-- TODO: Define kp (contact stiffness) -->
+        <kp>1e7</kp>
+        <!-- TODO: Define kd (contact damping) -->
+        <kd>1</kd>
+        <!-- TODO: Define fdir1 (friction direction) -->
+        <fdir1>1 0 0</fdir1>
+        <!-- TODO: Choose a material for visualization -->
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
+    <!-- Front Caster -->
+    <gazebo reference="front_caster">
+        <!-- TODO: Define mu1 (first friction coefficient) -->
+        <mu1>0</mu1>
+        <!-- TODO: Define mu2 (second friction coefficient) -->
+        <mu2>0</mu2>
+        <!-- TODO: Define kp (contact stiffness) -->
+        <kp>1e7</kp>
+        <!-- TODO: Define kd (contact damping) -->
+        <kd>1</kd>
+        <!-- TODO: Define fdir1 (friction direction) -->
+        <fdir1>1 0 0</fdir1>
+        <!-- TODO: Choose a material for visualization -->
+        <material>Gazebo/Red</material>
+    </gazebo>
+
+    <!-- Back Caster -->
+    <gazebo reference="back_caster">
+        <!-- TODO: Define mu1 (first friction coefficient) -->
+        <mu1>0</mu1>
+        <!-- TODO: Define mu2 (second friction coefficient) -->
+        <mu2>0</mu2>
+        <!-- TODO: Define kp (contact stiffness) -->
+        <kp>1e7</kp>
+        <!-- TODO: Define kd (contact damping) -->
+        <kd>1</kd>
+        <!-- TODO: Define fdir1 (friction direction) -->
+        <fdir1>1 0 0</fdir1>
+        <!-- TODO: Choose a material for visualization -->
+        <material>Gazebo/Red</material>
+    </gazebo>
 </robot>
